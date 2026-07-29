@@ -49,17 +49,17 @@ const LineSidebar = ({
   const currentRef = useRef([]);
   const rafRef = useRef(null);
   const lastRef = useRef(0);
-  const activeRef = useRef(defaultActive);
+  const activeRef = useRef(controlledActiveIndex ?? defaultActive);
   const smoothingRef = useRef(smoothing);
-  const [activeIndex, setActiveIndex] = useState(defaultActive);
+  const [activeIndex, setActiveIndex] = useState(controlledActiveIndex ?? defaultActive);
 
   useEffect(() => {
-    if (controlledActiveIndex !== undefined) {
+    if (controlledActiveIndex !== undefined && controlledActiveIndex !== activeIndex) {
       setActiveIndex(controlledActiveIndex);
     }
   }, [controlledActiveIndex]);
 
-  activeRef.current = activeIndex;
+  activeRef.current = controlledActiveIndex ?? activeIndex;
   smoothingRef.current = smoothing;
 
   // Single rAF loop that eases every item's --effect toward its target using
@@ -113,7 +113,9 @@ const LineSidebar = ({
   }, [falloff, proximityRadius, startLoop]);
 
   const handlePointerLeave = useCallback(() => {
-    targetsRef.current = targetsRef.current.map(() => 0);
+    targetsRef.current = targetsRef.current.map((_, i) =>
+      activeRef.current === i ? 1 : 0
+    );
     startLoop();
   }, [startLoop]);
 
@@ -131,9 +133,9 @@ const LineSidebar = ({
   }, []);
 
   const tickClass = showMarker
-    ? `after:absolute after:left-[calc(-1*var(--marker-length)-var(--marker-gap))] after:top-[calc(100%+var(--item-gap)/2)] after:h-px after:opacity-50 after:content-[''] last:after:content-none after:[background-color:var(--marker-color)] after:[width:calc(var(--marker-length)*var(--tick-scale))] ${
+    ? `after:absolute after:left-[calc(-1*var(--marker-length)-var(--marker-gap))] after:top-[calc(100%+var(--item-gap)/2)] after:h-[2px] after:opacity-60 after:content-[''] last:after:content-none after:[background-color:var(--marker-color)] after:[width:calc(var(--marker-length)*var(--tick-scale))] ${
         scaleTick
-          ? "after:origin-left after:[transform:translateY(-50%)_scaleX(calc(0.7+var(--effect,0)*0.6))]"
+          ? "after:origin-left after:[transform:translateY(-50%)_scaleX(calc(0.8+var(--effect,0)*0.2))]"
           : 'after:-translate-y-1/2'
       }`
     : '';
@@ -170,10 +172,10 @@ const LineSidebar = ({
             {showMarker && (
               <span
                 aria-hidden="true"
-                className="absolute left-[calc(-1*var(--marker-length)-var(--marker-gap))] top-1/2 h-px w-[length:var(--marker-length)] origin-left [background-color:color-mix(in_srgb,var(--accent-color)_calc(var(--effect,0)*100%),var(--marker-color))] [transform:translateY(-50%)_scaleX(calc(0.7+var(--effect,0)*0.5))]" />
+                className="absolute left-[calc(-1*var(--marker-length)-var(--marker-gap))] top-1/2 h-[2px] w-[length:var(--marker-length)] origin-left [background-color:color-mix(in_srgb,var(--accent-color)_calc(var(--effect,0)*100%),var(--marker-color))] [transform:translateY(-50%)]" />
             )}
             <span
-              className="relative inline-flex items-baseline leading-[1.2] [color:color-mix(in_srgb,var(--accent-color)_calc(var(--effect,0)*100%),var(--text-color))] [font-size:var(--font-size)] [transform:translateX(calc(var(--effect,0)*var(--max-shift)))]">
+              className="relative inline-flex items-baseline leading-[1.2] [color:color-mix(in_srgb,var(--accent-color)_calc(var(--effect,0)*100%),var(--text-color))] [font-size:var(--font-size)] [transform:translateX(calc(var(--effect,0)*var(--max-shift)))_scale(calc(1+var(--effect,0)*0.05))]">
               {showIndex && (
                 <span
                   className="mr-[0.6rem] font-mono text-[0.85em] [opacity:calc(0.55+var(--effect,0)*0.45)]">

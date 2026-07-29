@@ -239,50 +239,6 @@ const PillNav = ({
         className={`w-full md:w-max flex items-center justify-between md:justify-start box-border px-4 md:px-0 gap-1 ${className}`}
         aria-label="Primary"
         style={cssVars}>
-        {isRouterLink(items?.[0]?.href) ? (
-          <Link
-            to={items[0].href}
-            aria-label="Home"
-            onMouseEnter={handleLogoEnter}
-            role="menuitem"
-            ref={el => {
-              logoRef.current = el;
-            }}
-            className="rounded-full p-2 inline-flex items-center justify-center overflow-hidden border-[4px] border-black"
-            style={{
-              width: 'var(--nav-h)',
-              height: 'var(--nav-h)',
-              background: 'var(--base, #000)'
-            }}>
-            <img
-              src={logo}
-              alt={logoAlt}
-              ref={logoImgRef}
-              className="w-full h-full object-contain block" />
-          </Link>
-        ) : (
-          <a
-            href={logoHref || items?.[0]?.href || '#'}
-            aria-label="Home"
-            onClick={event => handleNavigate(event, { label: 'Home', href: logoHref || items?.[0]?.href || '#' })}
-            onMouseEnter={handleLogoEnter}
-            ref={el => {
-              logoRef.current = el;
-            }}
-            className="rounded-full p-2 inline-flex items-center justify-center overflow-hidden border-[4px] border-black"
-            style={{
-              width: 'var(--nav-h)',
-              height: 'var(--nav-h)',
-              background: 'var(--base, #000)'
-            }}>
-            <img
-              src={logo}
-              alt={logoAlt}
-              ref={logoImgRef}
-              className="w-full h-full object-contain block" />
-          </a>
-        )}
-
         <div
           ref={navItemsRef}
           className="relative items-center rounded-full hidden md:flex"
@@ -392,12 +348,12 @@ const PillNav = ({
       </nav>
       <div
         ref={mobileMenuRef}
-        className="md:hidden absolute top-[3em] left-4 right-4 rounded-[27px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-[998] origin-top"
+        className="md:hidden absolute top-[3.5em] left-6 right-6 max-h-[calc(100vh-5rem)] overflow-y-auto rounded-[27px] shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-[998] origin-top"
         style={{
           ...cssVars,
           background: 'var(--base, #f0f0f0)'
         }}>
-        <ul className="list-none m-0 p-[3px] flex flex-col gap-[3px]">
+        <ul className="list-none m-0 p-2 flex flex-col gap-2">
           {items.map(item => {
             const defaultStyle = {
               background: 'var(--pill-bg, #fff)',
@@ -413,7 +369,7 @@ const PillNav = ({
             };
 
             const linkClasses =
-              'block py-3 px-4 text-[16px] font-medium rounded-[50px] transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)]';
+              'block py-4 px-6 text-[16px] font-medium rounded-[50px] text-center transition-all duration-200 ease-[cubic-bezier(0.25,0.1,0.25,1)]';
 
             return (
               <li key={item.href}>

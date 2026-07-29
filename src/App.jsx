@@ -33,6 +33,7 @@ const navItems = [
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'achievements', label: 'Achievements' },
+  { id: 'resume', label: 'Resume' },
 ]
 
 const experiences = [
@@ -199,8 +200,8 @@ function App() {
       },
       {
         root: null,
-        rootMargin: '-22% 0px -58% 0px',
-        threshold: [0.1, 0.25, 0.5, 0.75],
+        rootMargin: '-15% 0px -65% 0px',
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
       },
     )
 
@@ -400,14 +401,46 @@ function App() {
             ))}
           </div>
         </section>
+
+        <section id="resume" className="content-section narrow-section">
+          <SectionHeading>Resume</SectionHeading>
+          <div className="resume-embed">
+            <iframe
+              src="https://drive.google.com/file/d/1lIWOEC1F2dpyIzKb3b2buE1STgVYuLGP/preview"
+              title="Tasavvuf Gori Resume"
+              className="resume-frame"
+              loading="lazy"
+            />
+          </div>
+          <p className="resume-download">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1lIWOEC1F2dpyIzKb3b2buE1STgVYuLGP"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download Resume &rarr;
+            </a>
+          </p>
+        </section>
       </main>
 
       <footer className="site-footer">
         <div className="footer-inner">
-          <span>&copy; {new Date().getFullYear()} Tasavvuf Gori</span>
-          <a href="https://github.com/tasavvuf" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
+          <div className="footer-left">
+            <span className="footer-name">Tasavvuf Gori</span>
+            <span className="footer-location">Gujarat, India</span>
+          </div>
+          <div className="footer-links">
+            <a href="https://github.com/tasavvuf" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/tasavvuf-gori" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            <a href="mailto:tasavvufg@gmail.com">
+              Email
+            </a>
+          </div>
         </div>
       </footer>
     </div>
