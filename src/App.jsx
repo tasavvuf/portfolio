@@ -92,7 +92,7 @@ const projects = [
     tech: 'Node.js, Express, Sarvam AI, Google Sheets API',
     summary: 'A voice-driven conversational agent with real-time text-to-speech and speech-to-text integration, live microphone recording, barge-in audio handling, and automated CRM data syncing.',
     demo: null,
-    repo: 'https://github.com/tasavvuf',
+    repo: 'https://github.com/tasavvuf/Gujarati-AI-Sales-Agent-Dashboard-VaniSales-',
   },
 ]
 
@@ -434,7 +434,7 @@ function App() {
             <a href="https://github.com/tasavvuf" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
-            <a href="https://linkedin.com/in/tasavvuf-gori" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/tasavvuf-gori-b21a81278/" target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
             <a href="mailto:tasavvufg@gmail.com">
