@@ -483,6 +483,10 @@ button {
   padding: 26px;
 }
 
+.project-card.featured {
+  grid-column: 1 / -1;
+}
+
 .project-card h3,
 .achievement-card h3 {
   color: #28282c;
@@ -507,6 +511,20 @@ button {
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
+}
+
+.project-details {
+  display: grid;
+  gap: 12px;
+  padding-left: 20px;
+  margin-top: 18px;
+}
+
+.project-details li {
+  color: rgb(54, 53, 55);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
 }
 
 .project-actions {

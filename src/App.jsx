@@ -67,6 +67,21 @@ const experiences = [
 
 const projects = [
   {
+    name: 'QuickMart — Hyperlocal Multi-Vendor Marketplace & Delivery Platform',
+    tech: 'MERN Stack, Socket.IO, MongoDB (GeoJSON/2dsphere), OSRM Routing',
+    summary: 'A 4-role hyperlocal delivery platform with independent, synchronized order state machines governing vendor fulfillment and delivery logistics.',
+    details: [
+      'Built a 4-role hyperlocal delivery platform (customer, vendor, delivery partner, admin) with independent, synchronized order state machines governing vendor fulfillment and delivery logistics.',
+      'Designed MongoDB aggregation pipelines ($geoNear, $lookup, $match) for location-based store discovery and real-time product availability filtering.',
+      'Implemented atomic order claiming using findOneAndUpdate conditional locking to prevent race conditions when multiple delivery partners attempt to accept the same order simultaneously.',
+      'Secured delivery verification with auto-generated OTP (schema-level select: false, role-restricted projection) and integrated OSRM road routing for real-time distance/ETA calculation on live delivery tracking maps.',
+      'Architected Socket.IO room-based isolation per order, ensuring only authorized customer/vendor/delivery-partner can access a given order\'s live location stream.',
+    ],
+    demo: 'https://hybridecom.vercel.app/',
+    repo: 'https://github.com/tasavvuf/quickmart',
+    featured: true,
+  },
+  {
     name: 'Real-Time Collaborative Whiteboard',
     tech: 'React 19, Node.js, Express, Socket.IO, HTML5 Canvas API, MongoDB',
     summary: 'A Figma/Excalidraw-inspired real-time canvas built without heavy third-party drawing libraries. Features live drawing synchronization, room-based collaboration, cursor presence, and stroke replay persistence.',
@@ -371,19 +386,29 @@ function App() {
           <SectionHeading>Projects</SectionHeading>
           <div className="project-grid">
             {projects.map((p, i) => (
-              <div key={i} className="project-card">
+              <div key={i} className={`project-card ${p.featured ? 'featured' : ''}`}>
                 <h3>{p.name}</h3>
                 <p className="project-tech">{p.tech}</p>
-                <p className="project-summary">{p.summary}</p>
+                {p.details ? (
+                  <ul className="project-details">
+                    {p.details.map((d, j) => (
+                      <li key={j}>{d}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="project-summary">{p.summary}</p>
+                )}
                 <div className="project-actions">
                   {p.demo && (
                     <a href={p.demo} target="_blank" rel="noopener noreferrer">
                       Live Demo &rarr;
                     </a>
                   )}
-                  <a href={p.repo} target="_blank" rel="noopener noreferrer">
-                    Source &rarr;
-                  </a>
+                  {p.repo && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer">
+                      Source &rarr;
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -406,7 +431,7 @@ function App() {
           <SectionHeading>Resume</SectionHeading>
           <div className="resume-embed">
             <iframe
-              src="https://drive.google.com/file/d/1lIWOEC1F2dpyIzKb3b2buE1STgVYuLGP/preview"
+              src="https://drive.google.com/file/d/1qN_GXMD301THAyOnTt1-_LfNkMqeM4UG/preview"
               title="Tasavvuf Gori Resume"
               className="resume-frame"
               loading="lazy"
@@ -414,7 +439,7 @@ function App() {
           </div>
           <p className="resume-download">
             <a
-              href="https://drive.google.com/uc?export=download&id=1lIWOEC1F2dpyIzKb3b2buE1STgVYuLGP"
+              href="https://drive.google.com/uc?export=download&id=1qN_GXMD301THAyOnTt1-_LfNkMqeM4UG"
               target="_blank"
               rel="noopener noreferrer"
             >
